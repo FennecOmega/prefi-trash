@@ -18,12 +18,15 @@ void deleteRoot(BST *B);                    // deletes root element and replaces
 void deleteElem(BST *B, int elem);          // finds element and calls deleteroot, passing the found element.       IMPLEMENTED
 int isMember(BST B, int elem);              // finds element, returns value of the element if found, -1 if not.     NOT IMPLEMENTED
 
+
 // display operations
 
 void dPreOrder(BST B);                      // displays preorder.                                                   IMPLEMENTED
 void dInOrder(BST B);                       // displays inorder.                                                    IMPLEMENTED
 void dPostOrder(BST B);                     // displays postorder.                                                  IMPLEMENTED
 void dDesc(BST B);                          // displays descending                                                  IMPLEMENTED
+void dPreOrderDetailed(BST B, int d, int parent);  // displays detailed preorder, -1 is the parent of root          IMPLEMENTED
+
 
 // utility functions
 
@@ -181,6 +184,18 @@ void dDesc(BST B){
         dDesc(B->RC);
         printf("%d ", B->data);
         dDesc(B->LC);
+    }
+}
+
+void dPreOrderDetailed(BST B, int d, int parent){
+    if(B != NULL){
+        int i;
+        for(i = d; i < d+1; i++){
+            printf("\n");
+        }
+        printf("%d (depth: %d | parent: %d)", B->data, d, parent);
+        dPreOrderDetailed(B->LC, d+1, B->data);
+        dPreOrderDetailed(B->RC, d+1, B->data);
     }
 }
 
