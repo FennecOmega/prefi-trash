@@ -23,6 +23,7 @@ int isMember(BST B, int elem);              // finds element, returns value of t
 void dPreOrder(BST B);                      // displays preorder.                                                   IMPLEMENTED
 void dInOrder(BST B);                       // displays inorder.                                                    IMPLEMENTED
 void dPostOrder(BST B);                     // displays postorder.                                                  IMPLEMENTED
+void dDesc(BST B);                          // displays descending                                                  IMPLEMENTED
 
 // utility functions
 
@@ -194,6 +195,14 @@ void dPreOrder(BST B)
 
         dPreOrder(B->RC);
 
+    }
+}
+
+void dDesc(BST B){
+    if(B != NULL){
+        dDesc(B->RC);
+        printf("%d ", B->data);
+        dDesc(B->LC);
     }
 }
 
