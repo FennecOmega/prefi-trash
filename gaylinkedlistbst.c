@@ -98,59 +98,37 @@ void insert(BST *B, int elem)
 
 void deleteRoot(BST *B)
 {
-    BST *trav = B;
-    BST temp = *B;
-
-    if (*trav != NULL)
+    BST *trav, temp;
+    if (*B != NULL)
     {
-
-        if ((*trav)->LC != NULL && (*trav)->RC == NULL)
+        if ((*B)->RC != NULL)
         {
-            *trav = (*trav)->LC;
-        }
-        else if ((*trav)->RC != NULL && (*trav)->LC == NULL)
-        {
-            *trav = (*trav)->RC;
-        }
-        else if ((*trav)->RC != NULL && (*trav)->LC != NULL)
-        {
-            trav = &(*trav)->RC;
-            while ((*trav)->LC != NULL)
-            {
-                trav = &(*trav)->LC;
-            }
+            trav = &(*B)->RC;
+            while ((*trav)->LC != NULL){ trav = &(*trav)->LC; }
             temp = *trav;
             swapElem(&(*B)->data, &temp->data);
             *trav = (*trav)->RC;
+        } else {
+            temp = *B;
+            *B = (*B)->LC;
         }
-        else
-        {
-            *trav = NULL;
-        }
-
         free(temp);
     }
-    else
-    {
+    else{
         printf("\n\nbst is empty lol");
     }
 }
 
 void deleteElem(BST *B, int elem)
 {
-
     BST *trav = B;
-
-    while (*trav != NULL && elem != (*trav)->data)
-    {
+    while (*trav != NULL && elem != (*trav)->data){
         trav = (elem > (*trav)->data) ? &(*trav)->RC : &(*trav)->LC;
     }
-    if (*trav != NULL)
-    {
+    if (*trav != NULL){
         deleteRoot(trav);
     }
-    else
-    {
+    else{
         printf("\n\nyour elem dont exist boi");
     }
 }
